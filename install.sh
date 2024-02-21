@@ -10,12 +10,23 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 #-------------------------------------------------------------------------------
 
 cp sshd_config /etc/ssh/sshd_config
+yum install policycoreutils-python-utils
+firewall-cmd --zone=public --add-port=4242/tcp --permanent
+firewall-cmd --reload
+systemctl restart sshd
 
 #-------------------------------------------------------------------------------
 # Hostname
 #-------------------------------------------------------------------------------
 
 hostnamectl set-hostname glodenos42
+
+#-------------------------------------------------------------------------------
+# Sudo
+#-------------------------------------------------------------------------------
+
+mkdir /var/log/sudo
+touch /var/log/sudo/sudo.log
 
 #-------------------------------------------------------------------------------
 # Password Policy
